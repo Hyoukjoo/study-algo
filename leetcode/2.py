@@ -1,41 +1,38 @@
+from functools import reduce
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: ListNode) -> ListNode:
-            node, prev = head, None
-            
-            while node:
-                next, node.next = node.next, prev
-                prev, node = node, next
-            
-            return prev
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        num_one = []
+        num_two = []
+        _sum = 0
         
-    def toList(self, node: List) -> List:
-        list: List = []
-
-        while node:
-            list.append(node.val)
-            node = node.next
-
-        return list
-
-    def toReverseLinkedList(self, result: str) -> ListNode:
-        prev: ListNode = None
-
-        for r in result:
-            node = ListNode(r)
+        while l1:
+            num_one.append(l1.val)
+            l1 = l1.next
+        while l2:
+            num_two.append(l2.val)
+            l2 = l2.next
+        
+        for i in range(len(num_one)):
+            _sum += num_one[i] * (10 ** i)
+            
+        for i in range(len(num_two)):
+            _sum += num_two[i] * (10 ** i)
+            
+        lst = list(map(int, list(str(_sum))))
+        
+        prev = None
+        node = None
+        
+        for l in lst:
+            node = ListNode(l)
             node.next = prev
             prev = node
-
-        return node
         
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        a = self.toList(self.reverseList(l1))
-        b = self.toList(self.reverseList(l2))
-
-        resultStr = int(''.join(str(e) for e in a)) + int(''.join(str(e) for e in b))
-
-        return self.toReverseLinkedList(str(resultStr))
+        return node
+            

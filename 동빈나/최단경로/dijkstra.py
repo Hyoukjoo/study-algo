@@ -1,9 +1,6 @@
 import heapq
 
 INF = int(ie9)
-n = 6
-graph = [[] for _ in range(n + 1)]
-distance = [INF] * (n + 1)
 
 def dijkstra(start):
     pq = []
@@ -19,3 +16,7 @@ def dijkstra(start):
             if cost < distance[node[0]]:
                 distance[node[0]] = cost
                 heapq.heappush(q, (cost, node[0]))
+
+n = 6
+graph = [[] for _ in range(n + 1)]
+distance = [INF] * (n + 1)

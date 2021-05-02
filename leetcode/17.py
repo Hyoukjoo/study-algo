@@ -11,21 +11,18 @@ class Solution:
             '9': 'wxyz'
         }
         
-        def dfs(index, path):
-            if len(digits) == len(path):
-                result.append(path)
-                return
-            
-            for i in range(index, len(digits)):
-                for j in dic[digits[i]]:
-                    dfs(i + 1, path + j)
-        
-        if not digits: 
-            return []
-        
         result = []
-        dfs(0, '')
+        end = len(digits)
         
-        return result
+        def dfs(s, i):
+            if i == end:
+                result.append(s)
+            else:
+                for char in dic[digits[i]]:
+                    dfs(s + char, i + 1)
+        
+        dfs('', 0)
+        
+        return [] if not digits else result
             
             
